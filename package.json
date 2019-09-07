@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "lerna": "lerna",
+    "test": "lerna run test"
+  },
+  "keywords": [],
+  "author": "Yin Shanyang <me@yinshanyang.com> (http://yinshanyang.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.16.4"
+  }
+}

@@ -1,0 +1,10 @@
+{
+	"name": "@ocd-data/json",
+	"version": "0.1.0",
+	"description": "",
+	"main": "index.js",
+	"keywords": [],
+	"author": "Yin Shanyang <me@yinshanyang.com> (http://yinshanyang.com)",
+	"license": "ISC",
+	"dependencies": {}
+}
