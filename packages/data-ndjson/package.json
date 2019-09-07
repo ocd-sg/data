@@ -11,5 +11,9 @@
 	},
 	"peerDependencies": {
 		"rxjs": "^6.5.3"
-	}
+	},
+	"gitHead": "75b65025998ea261053422ceb4616c6ce62f5c54",
+  "publishConfig": {
+    "access": "public"
+  }
 }
