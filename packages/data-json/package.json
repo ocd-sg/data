@@ -1,13 +1,13 @@
 {
-	"name": "@ocd-data/json",
-	"version": "0.1.0",
-	"description": "",
-	"main": "index.js",
-	"keywords": [],
-	"author": "Yin Shanyang <me@yinshanyang.com> (http://yinshanyang.com)",
-	"license": "ISC",
-	"gitHead": "75b65025998ea261053422ceb4616c6ce62f5c54",
-  "publishConfig": {
-    "access": "public"
-  }
+		"name": "@ocd-data/json",
+		"version": "0.1.1",
+		"description": "",
+		"main": "index.js",
+		"keywords": [],
+		"author": "Yin Shanyang <me@yinshanyang.com> (http://yinshanyang.com)",
+		"license": "ISC",
+		"gitHead": "75b65025998ea261053422ceb4616c6ce62f5c54",
+		"publishConfig": {
+				"access": "public"
+		}
 }

@@ -1,6 +1,6 @@
 {
 	"name": "@ocd-data/csv",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "",
 	"main": "index.js",
 	"keywords": [],
@@ -10,7 +10,7 @@
 		"d3-dsv": "^1.1.1"
 	},
 	"gitHead": "75b65025998ea261053422ceb4616c6ce62f5c54",
-  "publishConfig": {
-    "access": "public"
-  }
+	"publishConfig": {
+		"access": "public"
+	}
 }
