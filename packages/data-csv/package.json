@@ -7,7 +7,7 @@
 	"author": "Yin Shanyang <me@yinshanyang.com> (http://yinshanyang.com)",
 	"license": "ISC",
 	"dependencies": {
-		"d3-dsv": "^1.1.1"
+		"d3-dsv": "^1.2.0"
 	},
 	"gitHead": "75b65025998ea261053422ceb4616c6ce62f5c54",
 	"publishConfig": {

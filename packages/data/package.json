@@ -7,9 +7,9 @@
 	"author": "Yin Shanyang <me@yinshanyang.com> (http://yinshanyang.com)",
 	"license": "ISC",
 	"dependencies": {
-		"@ocd-data/csv": "^0.1.0",
-		"@ocd-data/json": "^0.1.0",
-		"@ocd-data/ndjson": "^0.1.0"
+		"@ocd-data/csv": "^0.1.1",
+		"@ocd-data/json": "^0.1.1",
+		"@ocd-data/ndjson": "^0.1.1"
 	},
 	"gitHead": "75b65025998ea261053422ceb4616c6ce62f5c54",
 	"publishConfig": {
