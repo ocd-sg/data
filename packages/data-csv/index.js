@@ -20,8 +20,8 @@ const format = (path, data) => fs.writeFileSync(path, csv.format(data))
 const formatRows = (path, data) => fs.writeFileSync(path, csv.formatRows(data))
 
 const fromCsv = (path, { headers } = { headers: true }) => {
-  const { Observable } = require('rxjs')
-  const { map, filter } = require('rxjs/operators')
+  const { Observable, combineLatest } = require('rxjs')
+  const { map, filter, first, skip } = require('rxjs/operators')
   const split = require('split2')
 
   const stream = fs.createReadStream(path).pipe(split(csv.parseRows))
@@ -34,22 +34,17 @@ const fromCsv = (path, { headers } = { headers: true }) => {
   )
 
   if (headers) {
-    let headerRow = []
-    let index = 0
-    const transformed$ = stream$.pipe(
-      map((row) => {
-        if (index++ === 0) {
-          headerRow = row
-          return null
-        } else {
-          const transformed = {}
-          for (let i = 0; i < row.length; i++) {
-            transformed[headerRow[i]] = row[i]
-          }
-          return transformed
+    const transformed$ = combineLatest(
+      stream$.pipe(first()),
+      stream$.pipe(skip(1))
+    ).pipe(
+      map(([headers, row]) => {
+        const transformed = {}
+        for (let i = 0; i < row.length; i++) {
+          transformed[headers[i]] = row[i]
         }
-      }),
-      filter((d) => d)
+        return transformed
+      })
     )
     return transformed$
   } else {
