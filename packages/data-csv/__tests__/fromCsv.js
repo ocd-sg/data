@@ -1,42 +1,48 @@
+const fs = require('fs')
+
 const path = require('path')
-const test = require('tape')
-const { fromCsv } = require('../index')
+const assert = require('node:assert')
+const { describe, it } = require('node:test')
+
+const { fromCsv } = require('../dist')
 
 const csvPath = path.resolve(__dirname, 'fixtures/data.csv')
 
-test('with with headers', (t) => {
-  t.plan(2)
-  const csv$ = fromCsv(csvPath)
-  const expectedValues = [
-    { id: '0', value1: '1', value2: '2' },
-    { id: '3', value1: '4', value2: '5' },
-  ]
+describe('@ocd-data/csv -> fromCsv', () => {
+  it('should handle CSVs with headers', (t) => {
+    const csv$ = fromCsv(csvPath)
+    const expected = [
+      { id: '0', value1: '1', value2: '2' },
+      { id: '3', value1: '4', value2: '5' },
+    ]
+    let actual = []
+    let counter = 0
 
-  let counter = 0
-  csv$.subscribe(
-    (row) => {
-      t.deepEqual(row, expectedValues[counter++])
-    },
-    () => {},
-    t.end
-  )
-})
+    csv$.on('data', (d) => {
+      assert.deepEqual(d, expected[counter++])
+      actual.push(d)
+    })
+    csv$.on('close', () => {
+      assert.deepEqual(actual, expected)
+    })
+  })
 
-test('with without headers', (t) => {
-  t.plan(3)
-  const csv$ = fromCsv(csvPath, { headers: false })
-  const expectedValues = [
-    ['id', 'value1', 'value2'],
-    ['0', '1', '2'],
-    ['3', '4', '5'],
-  ]
+  it('should handle CSVs without headers', (t) => {
+    const csv$ = fromCsv(csvPath, { headers: false })
+    const expected = [
+      ['id', 'value1', 'value2'],
+      ['0', '1', '2'],
+      ['3', '4', '5'],
+    ]
+    let actual = []
+    let counter = 0
 
-  let counter = 0
-  csv$.subscribe(
-    (row) => {
-      t.deepEqual(row, expectedValues[counter++])
-    },
-    () => {},
-    t.end
-  )
+    csv$.on('data', (d) => {
+      assert.deepEqual(d, expected[counter++])
+      actual.push(d)
+    })
+    csv$.on('close', () => {
+      assert.deepEqual(actual, expected)
+    })
+  })
 })
