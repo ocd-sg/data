@@ -3,7 +3,9 @@
     "lerna": "lerna",
     "build": "lerna run build",
     "update": "ncu -u && lerna exec ncu -- -u",
-    "publish": "lerna publish",
+    "publish": "npm run publish:build && npm run publish:publish",
+    "publish:build": "npm run build",
+    "publish:publish": "lerna publish",
     "test": "lerna run test"
   },
   "keywords": [],
