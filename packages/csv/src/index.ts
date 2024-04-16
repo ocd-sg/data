@@ -3,6 +3,7 @@ import fs from 'fs'
 import { dsvFormat } from 'd3-dsv'
 import { Transform, TransformCallback } from 'stream'
 import { StringDecoder } from 'string_decoder'
+import { z } from 'zod'
 
 // DSV
 export const dsv = (seperator: string) => {
@@ -22,13 +23,33 @@ export const dsv = (seperator: string) => {
 // CSV
 const csv = dsvFormat(',')
 
-export const parse = (path: string) => csv.parse(fs.readFileSync(path, 'utf8'))
-export const parseRows = (path: string) =>
-  csv.parseRows(fs.readFileSync(path, 'utf8'))
-export const format = (path: string, data: object[]) =>
-  fs.writeFileSync(path, csv.format(data))
-export const formatRows = (path: string, data: string[][]) =>
-  fs.writeFileSync(path, csv.formatRows(data))
+export function parse(path: string): Record<string, string>[]
+export function parse<T extends z.AnyZodObject>(
+  path: string,
+  schema: T
+): z.infer<T>[]
+export function parse<T extends z.AnyZodObject>(
+  path: string,
+  schema?: T
+): Record<string, string>[] | z.infer<T>[] {
+  switch (schema) {
+    case undefined:
+      return csv.parse(fs.readFileSync(path, 'utf8'))
+    default:
+      return csv
+        .parse(fs.readFileSync(path, 'utf8'))
+        .map((d) => schema.parse(d))
+  }
+}
+export function parseRows(path: string): string[][] {
+  return csv.parseRows(fs.readFileSync(path, 'utf8'))
+}
+export function format(path: string, data: object[]): void {
+  return fs.writeFileSync(path, csv.format(data))
+}
+export function formatRows(path: string, data: string[][]): void {
+  return fs.writeFileSync(path, csv.formatRows(data))
+}
 
 // CSV-stream
 class ObjectStream extends Transform {

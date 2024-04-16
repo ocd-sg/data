@@ -12,9 +12,10 @@
   "scripts": {
     "build": "npm run build:clean && npm run build:transpile && npm run build:declaration",
     "build:clean": "rm -rf dist",
-    "build:transpile": "tsc --outDir dist",
-    "build:declaration": "tsc --declaration --emitDeclarationOnly --outDir dist",
-    "test": "node --test tests/*.js"
+    "build:transpile": "tsc --build",
+    "build:declaration": "tsc --declaration --emitDeclarationOnly",
+    "test": "bun test tests/*",
+    "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
     "d3-dsv": "^2.0.0"
@@ -24,7 +25,11 @@
     "@types/d3-dsv": "^2.0.9",
     "@types/node": "^20.12.4",
     "tape": "^4.10.1",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "zod": "^3.22.4"
+  },
+  "peerDependencies": {
+    "zod": "^3"
   },
   "gitHead": "75b65025998ea261053422ceb4616c6ce62f5c54",
   "publishConfig": {
