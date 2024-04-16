@@ -1,10 +1,8 @@
 import fs from 'fs'
+
+import { dsvFormat } from 'd3-dsv'
 import { Transform, TransformCallback } from 'stream'
 import { StringDecoder } from 'string_decoder'
-
-const { dsvFormat } = require('d3-dsv')
-
-// import { dsvFormat } from 'd3-dsv'
 
 // DSV
 export const dsv = (seperator: string) => {

@@ -14,7 +14,7 @@
     "build:clean": "rm -rf dist",
     "build:transpile": "tsc --outDir dist",
     "build:declaration": "tsc --declaration --emitDeclarationOnly --outDir dist",
-    "test": "node --test __tests__/*.js"
+    "test": "node --test tests/*.js"
   },
   "dependencies": {
     "d3-dsv": "^2.0.0"
